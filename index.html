@@ -152,6 +152,76 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于使用element-uil里的文件上传文件缩略图使用过程中遇到的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/12/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8element-uil%E9%87%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%BC%A9%E7%95%A5%E5%9B%BE%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">关于使用element-uil里的文件上传文件缩略图使用过程中遇到的问题</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/12/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8element-uil%E9%87%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%BC%A9%E7%95%A5%E5%9B%BE%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-12-12T08:37:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先实例代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-upload</span></span></span><br><span class="line"><span class="tag">    <span class="attr">action</span>=<span class="string">&quot;https://jsonplaceholder.typicode.com/posts/&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">list-type</span>=<span class="string">&quot;picture-card&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:http-request</span>=<span class="string">&quot;imports1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:before-upload</span>=<span class="string">&quot;beforeUpload&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:file-list</span>=<span class="string">&#x27;fileList&#x27;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:auto-upload</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;el-upload__text&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;@/assets/images/tianjia@2x.png&quot;</span> <span class="attr">alt</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text_desc&quot;</span>&gt;</span>支持PNG/JPG，单张图片大小不超过10M<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">slot</span>=<span class="string">&quot;file&quot;</span> <span class="attr">slot-scope</span>=<span class="string">&quot;&#123;file&#125;&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag">          <span class="attr">class</span>=<span class="string">&quot;el-upload-list__item-thumbnail&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">:src</span>=<span class="string">&quot;file.url&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span></span></span><br><span class="line"><span class="tag">        &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;el-upload-list__item-actions&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">span</span></span></span><br><span class="line"><span class="tag">            <span class="attr">v-if</span>=<span class="string">&quot;!disabled&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">&quot;el-upload-list__item-delete&quot;</span></span></span><br><span class="line"><span class="tag">            @<span class="attr">click</span>=<span class="string">&quot;handleRemove(file)&quot;</span></span></span><br><span class="line"><span class="tag">          &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;el-icon-delete&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-upload</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//删除图片</span></span><br><span class="line"><span class="function"><span class="title">handleRemove</span>(<span class="params">file</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">this</span>.fileList.findIndex(<span class="function"><span class="params">value</span> =&gt;</span> value.uid == file.uid);</span><br><span class="line">  <span class="built_in">this</span>.fileList.splice(index,<span class="number">1</span>);</span><br><span class="line">&#125;,</span><br><span class="line"> <span class="comment">//上传图片</span></span><br><span class="line"><span class="function"><span class="title">imports1</span>(<span class="params">file</span>)</span> &#123;</span><br><span class="line">   <span class="built_in">this</span>.fileList.push(file);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">this</span>.fileList);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">//上传图片前</span></span><br><span class="line"><span class="function"><span class="title">beforeUpload</span>(<span class="params">file</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> testmsg = file.name.substring(file.name.lastIndexOf(<span class="string">&quot;.&quot;</span>) + <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> extension = testmsg === <span class="string">&quot;JPG&quot;</span>;</span><br><span class="line">  <span class="keyword">const</span> extension2 = testmsg === <span class="string">&quot;jpg&quot;</span>;</span><br><span class="line">  <span class="keyword">const</span> extension3 = testmsg === <span class="string">&quot;PNG&quot;</span>;</span><br><span class="line">  <span class="keyword">const</span> extension4 = testmsg === <span class="string">&quot;png&quot;</span>;</span><br><span class="line">  <span class="comment">// const isLt32M = file.size / 1024 / 1024 &lt; 32;</span></span><br><span class="line">  <span class="keyword">if</span> ((!extension &amp;&amp; !extension2) &amp;&amp; (!extension4 &amp;&amp; !extension3)) &#123;</span><br><span class="line">    <span class="comment">// this.$message.warning(&#x27;!上传图片只能是JPG格式或PNG格式&#x27;);</span></span><br><span class="line">     <span class="built_in">this</span>.$message(&#123;</span><br><span class="line">      message: <span class="string">&#x27;上传图片只能是JPG格式或PNG格式&#x27;</span>,</span><br><span class="line">      type: <span class="string">&#x27;warning&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> (extension || extension2) || (extension3 || extension4);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>注： 代码根据项目要求进行了增加和删减代码<br>1.添加:file-list=’fileList’方法 ，表示的是上传的文件列表，对上传的文件进行添加和删除可以直接对fileList进行操作。<br>2.添加:http-request=”imports1”方法，覆盖默认的上传行为，可以自定义上传的实现，上传文件时把文件放在fileList数组里。<br>3.添加:before-upload=”beforeUpload”方法，上传文件前对文件进行判断，若返回false则停止上传。<br>使用过程中遇到的问题: handleRemove删除文件函数不好使，<br>解决方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-upload</span></span></span><br><span class="line"><span class="tag">    <span class="attr">action</span>=<span class="string">&quot;https://jsonplaceholder.typicode.com/posts/&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">list-type</span>=<span class="string">&quot;picture-card&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:http-request</span>=<span class="string">&quot;imports1&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:before-upload</span>=<span class="string">&quot;beforeUpload&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:file-list</span>=<span class="string">&#x27;fileList&#x27;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:on-change</span>=<span class="string">&quot;changeImg&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:auto-upload</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">changeImg</span>(<span class="params">file, fileList</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.fileList = fileList;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.fileList);</span><br><span class="line">&#125;,</span><br><span class="line">imports1()</span><br><span class="line"> &#123;</span><br><span class="line">   <span class="comment">//不做操作</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>添加 :on-change=”changeImg”函数，on-change函数是文件状态改变时的钩子，添加文件、上传成功和上传失败时都会被调用，包含两个默认参数function(file, fileList),直接将参数fileList传给data里自己设置的文件列表fileList，问题解决！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/12/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8element-uil%E9%87%8C%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E7%BC%A9%E7%95%A5%E5%9B%BE%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
